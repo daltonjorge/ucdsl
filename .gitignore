@@ -1,0 +1,10 @@
+.DS_Store
+.gradle
+*.pdf
+build/
+output/
+target/
+tgf/
+markdown/
+asciidoc/
+usecases/

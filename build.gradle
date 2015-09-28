@@ -1,0 +1,26 @@
+apply plugin: "groovy"
+
+repositories {
+  mavenCentral()
+}
+
+dependencies {
+  compile "org.codehaus.groovy:groovy-all:2.3.7"
+  compile "commons-cli:commons-cli:1.2"
+  testCompile "org.spockframework:spock-core:0.7-groovy-2.0"
+  compile localGroovy()
+}
+
+task fatJar(type: Jar) {
+  manifest {
+    attributes 'Main-Class': 'dsl'
+  }
+  baseName = project.name + '-all'
+  from {
+    configurations.compile.collect {
+      it.isDirectory() ? it : zipTree(it)
+    }
+  }
+  with jar
+}
+
